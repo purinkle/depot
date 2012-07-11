@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
-  def new
-  end
+  skip_before_filter :authorize
+
+  def new; end
 
   def create
     user = User.find_by_name(params[:name])
@@ -17,5 +18,4 @@ class SessionsController < ApplicationController
     session[:user_id] = nil
     redirect_to store_url, notice: 'Logged out'
   end
-
 end
